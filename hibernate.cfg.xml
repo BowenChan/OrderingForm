@@ -26,8 +26,13 @@
         <!-- Drop the existing tables and create new one -->
         <property name="hbm2ddl.auto">update</property>
  
-        <!-- Metion here all the model classes along with their package name -->
-       
+        <!-- Mention here all the model classes along with their package name -->
+       	<mapping class = "clientStore/Client">
+       	<mapping class = "clientStore/Address">
+       	<mapping class = "clientStore/QueueClient">
+       	<mapping class = "serverStore/Admin">
+       	<mapping class = "sharedClass/Users">
+       	<mapping class = "sharedClass/Invoice">
 	</session-factory>
 </hibernate-configuration>
 

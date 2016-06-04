@@ -15,3 +15,13 @@ Road Map
 	Version 3
 		IOS and Android Mobile working application
 
+Version 1: To Do List
+
+	Client Sign up (Queue Sign up Database)
+	Server Log in 
+
+	Server Assigning Primary ID to Client
+	Client Log in
+	
+	Determine how to store items in stock//Inventory
+	Work on Invoice table
