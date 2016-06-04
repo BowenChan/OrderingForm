@@ -4,6 +4,7 @@ import java.util.List;
 
 import clientStore.Client;
 import clientStore.QueueClient;
+import serverStore.Admin;
 
 public interface StoreDAO {
 	
@@ -19,6 +20,7 @@ public interface StoreDAO {
 	Client findUser(String username, String password);
 	
 	//Server DAO Functions
+	Admin create(User user);
 	List<Invoice> findByClient(Client client);
 	List<Invoice> findAllInvoice(); 
 	List<Client> findAllClient();

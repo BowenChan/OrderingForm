@@ -31,7 +31,7 @@
        	<mapping class = "clientStore.Address"/>
        	<mapping class = "clientStore.QueueClient"/>
        	<mapping class = "serverStore.Admin"/>
-       	<mapping class = "sharedClass.Users"/>
+       	<mapping class = "sharedClass.User"/>
        	<mapping class = "sharedClass.Invoice"/>
        	<mapping class = "serverStore.Items"/>
        	

@@ -1,5 +1,7 @@
 package sharedClass;
 
+import serverStore.Admin;
+
 public class ServiceLayer {
 	
 	ConcreteStoreDAO storeDAO;
@@ -13,12 +15,17 @@ public class ServiceLayer {
 	public ServiceLayer() {
 		// TODO Auto-generated constructor stub
 		storeDAO = new ConcreteStoreDAO();
+		if(!checkAdmin()){
+			User user = new User();
+			user.setUsername("admin");
+			user.setPassword("admin");
+			storeDAO.create(user);
+		}
 		
 	}
 	
-	private boolean checkAdmin(){
-		
-		return false;
+	public boolean checkAdmin(){
+		return storeDAO.checkAdmin();
 	}
 	
 }

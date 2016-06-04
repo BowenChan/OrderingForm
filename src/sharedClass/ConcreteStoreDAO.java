@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 
 import clientStore.Client;
 import clientStore.QueueClient;
+import serverStore.Admin;
 
 public class ConcreteStoreDAO implements StoreDAO {
 
@@ -59,6 +60,29 @@ public class ConcreteStoreDAO implements StoreDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public Admin create(User user) {
+		// TODO Auto-generated method stub
+		try {
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+			Admin admin = new Admin();
+			
+			session.save(user);
+			//session.save(admin);
+			//session.getTransaction().commit();
+			admin.setUsername(user.getUsername());
+			admin.setUserID(user.getID());
+			session.save(admin);
+			session.getTransaction().commit();
+			session.close();
+			return admin;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
 
 	@Override
 	public List<Invoice> findAllInvoice() {
@@ -92,14 +116,17 @@ public class ConcreteStoreDAO implements StoreDAO {
 			session.beginTransaction();
 			String query = "From Admin";
 			Query queryResult = session.createQuery(query);
-			return queryResult.getFetchSize() > 0;
+			//System.out.println(queryResult.list());
+			return (queryResult.getFetchSize() != null);
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println(e);
+			System.out.println("Error is " + e);
 		}
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	
 
 
 }

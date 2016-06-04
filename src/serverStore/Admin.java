@@ -12,6 +12,7 @@ public class Admin {
 	
 	//Setting up Admins' Attribute
 	private int adminID;
+	private int userID;
 	private String username;
 	
 	@Id
@@ -24,6 +25,13 @@ public class Admin {
 		this.adminID = id;
 	}
 	
+	public int getUserID(){
+		return userID;
+	}
+	
+	public void setUserID(int id){
+		userID = id;
+	}
 	@Column(unique = true)
 	public String getUsername(){
 		return username;
