@@ -7,7 +7,7 @@
     <session-factory>
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/pizzaOrder</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/OrderForm</property>
         <property name="connection.username">root</property>
         <property name="connection.password"></property>
         
@@ -33,6 +33,8 @@
        	<mapping class = "serverStore/Admin">
        	<mapping class = "sharedClass/Users">
        	<mapping class = "sharedClass/Invoice">
+       	<mapping class = "serverStore/Items">
+       	
 	</session-factory>
 </hibernate-configuration>
 
