@@ -26,7 +26,7 @@
         <!-- Drop the existing tables and create new one -->
         <property name="hbm2ddl.auto">update</property>
  
-        <!-- Mention here all the model classes along with their package name -->
+        <!-- Metion here all the model classes along with their package name -->
        
 	</session-factory>
 </hibernate-configuration>
