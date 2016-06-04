@@ -24,6 +24,7 @@ public class ServiceLayer {
 		
 	}
 	
+	
 	public boolean checkAdmin(){
 		return storeDAO.checkAdmin();
 	}
