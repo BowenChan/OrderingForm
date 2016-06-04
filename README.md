@@ -17,7 +17,7 @@ Road Map
 
 Version 1: To Do List
 
-	Client Sign up (Queue Sign up Database)
+	Client Sign up (Queue Sign up Database) X
 	Server Log in 
 
 	Server Assigning Primary ID to Client
@@ -25,3 +25,8 @@ Version 1: To Do List
 	
 	Determine how to store items in stock//Inventory
 	Work on Invoice table
+
+	Allow admin to register new admins
+	Presentation layer functions
+	Service Layer Functions
+	DAO Functions

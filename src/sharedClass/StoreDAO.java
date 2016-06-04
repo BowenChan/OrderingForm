@@ -1,6 +1,7 @@
 package sharedClass;
 
 import java.util.List;
+import java.util.Queue;
 
 import clientStore.Client;
 import clientStore.QueueClient;
@@ -14,7 +15,8 @@ public interface StoreDAO {
 	boolean delete(Invoice invoice);
 	
 	//Client DAO Functions
-	Client create(Client client);
+	Client create(QueueClient client);
+	boolean createQ(QueueClient client);
 	boolean update(Client client);
 	boolean delete(Client client);
 	Client findUser(String username, String password);

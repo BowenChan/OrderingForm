@@ -2,9 +2,7 @@ package sharedClass;
 
 import java.util.Scanner;
 
-import javax.persistence.criteria.CriteriaBuilder.Case;
-import javax.print.DocFlavor.INPUT_STREAM;
-
+import clientStore.Address;
 import serverStore.Admin;
 
 public class Main {
@@ -62,25 +60,25 @@ public class Main {
 		switch(input){
 		case "1":
 			if(!login){
-				
+				signUp(in);
 			}
 			else if (admin) {
-				
+				viewAllCompany(in);
 			}
 			else{
-				
+				createAnOrder(in);
 			}
 			break;
 			
 		case "2":	
 			if(!login){
-				
+				logIn(in);
 			}
 			else if (admin) {
-				
+				viewAllOrderAdmin(in);
 			}
 			else{
-				
+				modifyAnOrder(in);
 			}
 			break;
 			
@@ -89,19 +87,19 @@ public class Main {
 				System.exit(1);
 			}
 			else if (admin) {
-				
+				viewAllQueueClients(in);
 			}
 			else{
-				
+				viewAllOrder(in);
 			}
 			break;
 			
 		case "4":
 			if(admin){
-				
+				viewAllQueueOrders(in);
 			}
 			else if(login) {
-				
+				changeYourPassword(in);
 			}
 			else
 				System.out.println("This input is not valid");
@@ -109,10 +107,10 @@ public class Main {
 
 		case "5":
 			if(admin){
-				
+				changeYourPassword(in);
 			}
 			else if(login) {
-				
+				logOut(in);
 			}
 			else
 				System.out.println("This input is not valid");
@@ -121,7 +119,7 @@ public class Main {
 	
 		case "6":
 			if(admin){
-				
+				logOut(in);
 			}
 			else if(login) {
 				System.exit(1);
@@ -144,14 +142,14 @@ public class Main {
 		return true;
 				
 	}
-	
+
 	/**
 	 * Method logIn
 	 * 
 	 *  
 	 * @return
 	 */
-	public static boolean logIn(){
+	public static boolean logIn(Scanner in){
 	
 		return false;
 	}
@@ -161,7 +159,7 @@ public class Main {
 	 * 
 	 * @return
 	 */
-	public static boolean logOut(){
+	public static boolean logOut(Scanner in){
 		return false;
 	}
 	
@@ -170,8 +168,31 @@ public class Main {
 	 * 
 	 * @return
 	 */
-	public static boolean signUp(){
+	public static boolean signUp(Scanner in){
+		System.out.println("What is the name of your company?");
+		String company = in.next();
+		System.out.print("Username: ");
+		String username = in.next();
+		System.out.print("Password: ");
+		String password = in.next();
 		
+		
+		System.out.println("----------- Processing Information -----------");
+		System.out.print("Entering Address\nAddress Line: ");
+		
+		//ignore the line at EnteringAddress
+		in.nextLine();
+		Address address = new Address();
+		address.setStreet(in.nextLine());
+		System.out.print("City: ");
+		address.setCity(in.next());
+		System.out.print("State: ");
+		address.setState(in.next());
+		System.out.print("Zipcode: ");
+		address.setZipcode(in.next());
+
+		String result = sLayer.createUser(company, username,password, address);
+		System.out.println(result);
 		return false;
 	}
 	
@@ -180,7 +201,7 @@ public class Main {
 	 * 
 	 * @return
 	 */
-	public static boolean createAnOrder(){
+	public static boolean createAnOrder(Scanner in){
 		
 		return true;
 	}
@@ -189,22 +210,31 @@ public class Main {
 	 * Method modifyAnOrder
 	 * @return
 	 */
-	public static boolean modifyAnOrder(){
+	public static boolean modifyAnOrder(Scanner in){
 		return true;
 	}
 
 	/**
 	 * Method viewAllOrder
 	 */
-	public static void viewAllOrder(){
+	public static void viewAllOrder(Scanner in){
 		
 	}
+	
+	/**
+	 * Method viewAllOrderAdmin
+	 */
+	public static void viewAllOrderAdmin(Scanner in) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	/**
 	 * Method changeYourPassword
 	 * @return
 	 */
-	public static boolean changeYourPassword(){
+	public static boolean changeYourPassword(Scanner in){
 		
 		return true;
 	}
@@ -215,7 +245,7 @@ public class Main {
 	 * 
 	 * @return
 	 */
-	public static boolean viewAllCompany(){
+	public static boolean viewAllCompany(Scanner in){
 		return true;
 	}
 
@@ -223,14 +253,14 @@ public class Main {
 	 * Method viewAllQueueClients
 	 * 
 	 */
-	public static void viewAllQueueClients(){
+	public static void viewAllQueueClients(Scanner in){
 		
 	}
 
 	/**
 	 * Method viewAllQueueOrders
 	 */
-	public static void viewAllQueueOrders(){
+	public static void viewAllQueueOrders(Scanner in){
 		
 	}
 

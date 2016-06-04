@@ -13,6 +13,7 @@ import javax.persistence.TemporalType;
 public class QueueClient {
 	
 	private int customerID;
+	private String company;
 	private String username;
 	private String password;
 	private Address address;
@@ -26,6 +27,15 @@ public class QueueClient {
 	
 	public void setID(int id){
 		this.customerID = id;
+	}
+	
+	@Column(unique = true)
+	public String getCompany(){
+		return company;
+	}
+	
+	public void setCompany(String company){
+		this.company = company;
 	}
 	
 	@Column(unique = true)

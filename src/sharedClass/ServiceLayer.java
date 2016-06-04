@@ -1,5 +1,7 @@
 package sharedClass;
 
+import clientStore.Address;
+import clientStore.QueueClient;
 import serverStore.Admin;
 
 public class ServiceLayer {
@@ -27,6 +29,20 @@ public class ServiceLayer {
 	
 	public boolean checkAdmin(){
 		return storeDAO.checkAdmin();
+	}
+
+	public String createUser(String company, String username, String password, Address address) {
+		// TODO Auto-generated method stub
+		QueueClient user = new QueueClient();
+		user.setCompany(company);
+		user.setUsername(username);
+		user.setPassword(password);
+		user.setAddress(address);
+		//storeDAO.createQ(user);
+		if(storeDAO.createQ(user))
+			return "Thank you for registering, Please wait for admin to approve your company";
+		else
+			return "We were unable to register you";
 	}
 	
 }

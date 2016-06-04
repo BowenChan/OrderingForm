@@ -1,5 +1,6 @@
 package sharedClass;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.hibernate.*;
@@ -29,12 +30,6 @@ public class ConcreteStoreDAO implements StoreDAO {
 	public boolean delete(Invoice invoice) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	@Override
-	public Client create(Client client) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -70,8 +65,6 @@ public class ConcreteStoreDAO implements StoreDAO {
 			Admin admin = new Admin();
 			
 			session.save(user);
-			//session.save(admin);
-			//session.getTransaction().commit();
 			admin.setUsername(user.getUsername());
 			admin.setUserID(user.getID());
 			session.save(admin);
@@ -117,12 +110,37 @@ public class ConcreteStoreDAO implements StoreDAO {
 			String query = "From Admin";
 			Query queryResult = session.createQuery(query);
 			//System.out.println(queryResult.list());
+			session.close();
 			return (queryResult.getFetchSize() != null);
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("Error is " + e);
 		}
 		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Client create(QueueClient client) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean createQ(QueueClient client) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		try {
+			session.beginTransaction();
+			client.setRegistrationDate(new GregorianCalendar());
+			session.save(client);
+			session.getTransaction().commit();
+			session.close();
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("The error is : " + e);
+		}
 		return false;
 	}
 
