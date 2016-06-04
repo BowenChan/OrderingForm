@@ -27,10 +27,7 @@
         <property name="hbm2ddl.auto">update</property>
  
         <!-- Mention here all the model classes along with their package name -->
-       	<mapping class="pizzaShop.PizzaOrder"/>
-        <mapping class="pizzaShop.Customer"/>
-
-        <mapping class="pizzaShop.Address"/>
-</session-factory>
+       
+	</session-factory>
 </hibernate-configuration>
 
