@@ -3,6 +3,7 @@ package sharedClass;
 import java.util.List;
 
 import clientStore.Client;
+import clientStore.QueueClient;
 
 public interface StoreDAO {
 	
@@ -21,8 +22,10 @@ public interface StoreDAO {
 	List<Invoice> findByClient(Client client);
 	List<Invoice> findAllInvoice(); 
 	List<Client> findAllClient();
+	List<QueueClient> findAllQueueClients();
 	Client searchClientByID(String keyword);
 	
+	boolean checkAdmin();
 	
 
 }

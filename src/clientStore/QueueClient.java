@@ -1,8 +1,5 @@
 package clientStore;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,9 +9,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "Client")
-public class Client {
-	private String keywordID;
+@Table(name = "QueueClient")
+public class QueueClient {
+	
 	private int customerID;
 	private String username;
 	private String password;
@@ -29,15 +26,6 @@ public class Client {
 	
 	public void setID(int id){
 		this.customerID = id;
-	}
-	
-	@Column(unique = true)
-	public String getKeyword(){
-		return keywordID;
-	}
-	
-	public void setKeyword(String keyword){
-		this.keywordID = keyword;
 	}
 	
 	@Column(unique = true)
