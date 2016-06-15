@@ -1,7 +1,7 @@
 package sharedClass;
 
 import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.List;import java.util.Queue;
 
 import org.hibernate.*;
 
@@ -105,16 +105,17 @@ public class ConcreteStoreDAO implements StoreDAO {
 	}
 	
 	@Override
-	public List<QueueClient> findAllQueueClients() {
+	public List findAllQueueClients() {
 		// TODO Auto-generated method stub
 		try {
 			Session session = sessionFactory.openSession();
 			session.beginTransaction();
-			String queryString = "From QueueClients";
+			String queryString = "from QueueClient";
 			Query queryResult = session.createQuery(queryString);
+			List<QueueClient> clients = queryResult.list();
 			session.getTransaction().commit();
 			session.close();
-			return queryResult.list();
+			return clients;
 		}
 		catch(Exception e){
 			return null;
