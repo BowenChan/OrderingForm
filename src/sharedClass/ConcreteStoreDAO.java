@@ -4,7 +4,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.hibernate.*;
-import org.hibernate.SessionFactory;
 
 import clientStore.Client;
 import clientStore.QueueClient;
@@ -45,9 +44,25 @@ public class ConcreteStoreDAO implements StoreDAO {
 	}
 
 	@Override
-	public Client findUser(String username, String password) {
+	public User findUser(String username, String password) {
 		// TODO Auto-generated method stub
-		return null;
+		try{
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+			String queryString = "from User where username = :username AND password = :password";
+			Query query = session.createQuery(queryString);
+			query.setString("username", username);
+			query.setString("password",password);
+			Object queryResult = query.uniqueResult();
+			User user =(User) queryResult;
+			session.getTransaction().commit();
+			return user;
+		}
+		catch (Exception e)
+		{
+			System.out.println("Unable to login");
+			return null;
+		}
 	}
 
 	@Override

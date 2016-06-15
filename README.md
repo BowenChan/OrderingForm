@@ -18,7 +18,7 @@ Road Map
 Version 1: To Do List
 
 	Client Sign up (Queue Sign up Database) X
-	Server Log in 
+	Server Log in x 
 
 	Server Assigning Primary ID to Client
 	Client Log in
@@ -30,3 +30,4 @@ Version 1: To Do List
 	Presentation layer functions
 	Service Layer Functions
 	DAO Functions
+

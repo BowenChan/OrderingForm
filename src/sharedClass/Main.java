@@ -1,8 +1,10 @@
 package sharedClass;
 
+import java.util.List;
 import java.util.Scanner;
 
 import clientStore.Address;
+import clientStore.QueueClient;
 import serverStore.Admin;
 
 public class Main {
@@ -150,7 +152,16 @@ public class Main {
 	 * @return
 	 */
 	public static boolean logIn(Scanner in){
-	
+		System.out.println("Enter the username: ");
+		String username = in.next();
+		System.out.println("Enter the password: ");
+		String password = in.next();
+		if(sLayer.login(username,password)){
+			login = true;
+			if(username.equals("admin"))
+				admin = true;
+		}
+		
 		return false;
 	}
 	
@@ -254,7 +265,10 @@ public class Main {
 	 * 
 	 */
 	public static void viewAllQueueClients(Scanner in){
-		
+		List<QueueClient> clients = sLayer.viewAllQueueClient();
+		for(QueueClient client : clients){
+			System.out.println(client.getCompany());
+		}
 	}
 
 	/**

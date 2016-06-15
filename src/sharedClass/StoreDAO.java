@@ -19,7 +19,7 @@ public interface StoreDAO {
 	boolean createQ(QueueClient client);
 	boolean update(Client client);
 	boolean delete(Client client);
-	Client findUser(String username, String password);
+	User findUser(String username, String password);
 	
 	//Server DAO Functions
 	Admin create(User user);

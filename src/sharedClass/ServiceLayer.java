@@ -3,11 +3,13 @@ package sharedClass;
 import java.util.List;
 
 import clientStore.Address;
+import clientStore.Client;
 import clientStore.QueueClient;
 import serverStore.Admin;
 
 public class ServiceLayer {
 	
+	User currentLogin;
 	ConcreteStoreDAO storeDAO;
 	
 	/**
@@ -51,4 +53,12 @@ public class ServiceLayer {
 		List<QueueClient> clients = storeDAO.findAllQueueClients();
 		return clients;
 	}
+	
+	public boolean login(String username, String password){
+		User user = storeDAO.findUser(username, password);
+		if(user != null)
+			return true;
+		return false;
+	}
+	
 }
