@@ -92,7 +92,18 @@ public class ConcreteStoreDAO implements StoreDAO {
 	@Override
 	public List<QueueClient> findAllQueueClients() {
 		// TODO Auto-generated method stub
-		return null;
+		try {
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+			String queryString = "From QueueClients";
+			Query queryResult = session.createQuery(queryString);
+			session.getTransaction().commit();
+			session.close();
+			return queryResult.list();
+		}
+		catch(Exception e){
+			return null;
+		}
 	}
 
 	@Override

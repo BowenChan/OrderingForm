@@ -1,5 +1,7 @@
 package sharedClass;
 
+import java.util.List;
+
 import clientStore.Address;
 import clientStore.QueueClient;
 import serverStore.Admin;
@@ -45,4 +47,8 @@ public class ServiceLayer {
 			return "We were unable to register you";
 	}
 	
+	public List<QueueClient> viewAllQueueClient(){
+		List<QueueClient> clients = storeDAO.findAllQueueClients();
+		return clients;
+	}
 }
