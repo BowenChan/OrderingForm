@@ -202,7 +202,7 @@ public class Main {
 		System.out.print("Zipcode: ");
 		address.setZipcode(in.next());
 
-		String result = sLayer.createUser(company, username,password, address);
+		String result = sLayer.createQUser(company, username,password, address);
 		System.out.println(result);
 		return false;
 	}
@@ -267,8 +267,19 @@ public class Main {
 	public static void viewAllQueueClients(Scanner in){
 		List<QueueClient> clients = sLayer.viewAllQueueClient();
 		for(QueueClient client : clients){
-			System.out.println(client.getCompany());
+			System.out.println(client.toString());
 		}
+		System.out.println("Would you like to approve the companies(Y/N): ");
+		String input = in.next();
+		if(input.toLowerCase() == "y"){
+			for(QueueClient client : clients){
+				System.out.println(client.toString());
+				System.out.println("(Y/N");
+				input = in.next();
+				sLayer.createUser(client);
+			}
+		}
+		
 	}
 
 	/**

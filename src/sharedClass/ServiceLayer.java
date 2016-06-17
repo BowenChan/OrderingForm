@@ -25,7 +25,7 @@ public class ServiceLayer {
 			User user = new User();
 			user.setUsername("admin");
 			user.setPassword("admin");
-			storeDAO.create(user);
+			storeDAO.createA(user);
 		}
 		
 	}
@@ -35,7 +35,7 @@ public class ServiceLayer {
 		return storeDAO.checkAdmin();
 	}
 
-	public String createUser(String company, String username, String password, Address address) {
+	public String createQUser(String company, String username, String password, Address address) {
 		// TODO Auto-generated method stub
 		QueueClient user = new QueueClient();
 		user.setCompany(company);
@@ -47,6 +47,23 @@ public class ServiceLayer {
 			return "Thank you for registering, Please wait for admin to approve your company";
 		else
 			return "We were unable to register you";
+	}
+	
+	public boolean createUser(QueueClient client){
+		Client newClient = new Client();
+		User newUser = new User();
+		newClient.setAddress(client.getAddress());
+		newClient.setUsername(client.getUsername());
+		newClient.setPassword(client.getPassword());
+		newClient.setKeyword(client.getCompany());
+		if(storeDAO.create(newClient))
+		{
+			newUser.setUsername(client.getUsername());
+			newUser.setPassword(client.getPassword());
+			storeDAO.create(newUser);
+			
+		}	
+		return true;
 	}
 	
 	public List<QueueClient> viewAllQueueClient(){

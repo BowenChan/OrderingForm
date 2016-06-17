@@ -10,19 +10,20 @@ import serverStore.Admin;
 public interface StoreDAO {
 	
 	//Invoice DAO Functions
-	Invoice create(Invoice invoice);
+	boolean create(Invoice invoice);
 	boolean update(Invoice invoice);
 	boolean delete(Invoice invoice);
 	
 	//Client DAO Functions
-	Client create(QueueClient client);
+	boolean create(Client client);
 	boolean createQ(QueueClient client);
 	boolean update(Client client);
 	boolean delete(Client client);
 	User findUser(String username, String password);
 	
 	//Server DAO Functions
-	Admin create(User user);
+	boolean createA(User user);
+	boolean create(User user);
 	List<Invoice> findByClient(Client client);
 	List<Invoice> findAllInvoice(); 
 	List<Client> findAllClient();

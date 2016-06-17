@@ -71,6 +71,11 @@ public class QueueClient {
 	public void setRegistrationDate(java.util.Calendar registrationDate) {
 		this.registrationDate = registrationDate;
 	}
+	
+	@Override
+	public String toString(){
+		return "ID: " + getID() + " Company: " + getCompany() + " Address: " +getAddress();
+	}
 	   
 	
 }
