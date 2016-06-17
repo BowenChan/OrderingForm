@@ -152,9 +152,9 @@ public class Main {
 	 * @return
 	 */
 	public static boolean logIn(Scanner in){
-		System.out.println("Enter the username: ");
+		System.out.print("Enter the username: ");
 		String username = in.next();
-		System.out.println("Enter the password: ");
+		System.out.print("Enter the password: ");
 		String password = in.next();
 		if(sLayer.login(username,password)){
 			login = true;
@@ -269,17 +269,25 @@ public class Main {
 		for(QueueClient client : clients){
 			System.out.println(client.toString());
 		}
-		System.out.println("Would you like to approve the companies(Y/N): ");
-		String input = in.next();
-		if(input.toLowerCase() == "y"){
-			for(QueueClient client : clients){
-				System.out.println(client.toString());
-				System.out.println("(Y/N");
-				input = in.next();
-				sLayer.createUser(client);
+		if(!clients.isEmpty()){
+			System.out.print("Would you like to approve the companies(Y/N): ");
+			String input = in.next();
+			if(input.toLowerCase().equals("y")){
+				System.out.println("----- Entering List of Queue Company -----");
+				for(QueueClient client : clients){
+					System.out.println(client.toString());
+					System.out.print("Would you like to approve: (Y/N): ");
+					input = in.next();
+					if(input.toLowerCase().equals("y")){
+						System.out.println("----- Approving And entering the Company ----- ");
+						sLayer.createUser(client);
+					}
+				}
 			}
 		}
-		
+		else{
+			System.out.println("There are no company currently in the Queue");
+		}
 	}
 
 	/**

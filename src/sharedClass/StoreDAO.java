@@ -24,6 +24,7 @@ public interface StoreDAO {
 	//Server DAO Functions
 	boolean createA(User user);
 	boolean create(User user);
+	boolean delete(QueueClient client);
 	List<Invoice> findByClient(Client client);
 	List<Invoice> findAllInvoice(); 
 	List<Client> findAllClient();

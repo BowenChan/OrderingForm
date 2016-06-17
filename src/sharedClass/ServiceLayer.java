@@ -61,6 +61,7 @@ public class ServiceLayer {
 			newUser.setUsername(client.getUsername());
 			newUser.setPassword(client.getPassword());
 			storeDAO.create(newUser);
+			storeDAO.delete(client);
 			
 		}	
 		return true;

@@ -286,6 +286,8 @@ public class ConcreteStoreDAO implements StoreDAO {
 	/**
 	 * A queue client will be created and persisted into the database
 	 * 
+	 * After the client is added into the database then it will be removed from the queue database
+	 * 
 	 * @param client	The queue client that will be added into the database
 	 * @return			Whether or not the queue client was persisted correctly
 	 */
@@ -307,7 +309,22 @@ public class ConcreteStoreDAO implements StoreDAO {
 		return false;
 	}
 
-	
+	/**
+	 * The client will be deleted from the Queue Client database
+	 * when inserted into the client database
+	 * 
+	 * @param client	Takes in the client that will be deleted
+	 * @return			Whether the client has been sucecssfully deleted
+	 */
+	@Override
+	public boolean delete(QueueClient client) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.delete(client);
+		session.getTransaction().commit();
+		session.close();
+		return true;
+	}
 
 
 }

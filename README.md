@@ -22,7 +22,9 @@ Version 1: To Do List
 
 	Server Assigning Primary ID to Client
 	Client Log in
-	
+
+	Logout function
+		
 	Determine how to store items in stock//Inventory
 	Work on Invoice table
 
