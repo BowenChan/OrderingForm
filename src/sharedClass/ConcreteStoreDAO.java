@@ -326,6 +326,40 @@ public class ConcreteStoreDAO implements StoreDAO {
 		return true;
 	}
 
+	/**
+	 * Persist the data of an inventory item and the amount
+	 * into the Items database
+	 * 
+	 * @param item		The item that will be added into the database
+	 * @param amount	The number in stock of the given item
+	 * @return			Whether the item fully persisted
+	 */
+	@Override
+	public boolean createInventory(String item, int amount){
+		return true;
+	}
+	
+	/**
+	 * Update the data of an inventory item and the amount
+	 * into the Items database
+	 * 
+	 * @param item		The item that will be updated into the database
+	 * @param amount	The number in stock of the given item
+	 * @return			Whether the item fully persisted
+	 */
+	@Override
+	public boolean updateInventory(String item, int amount){
+		return true;
+	}
 
+	/**
+	 * Delete the given item from the database
+	 * 
+	 * @return			Whether the item fully deleted
+	 */
+	@Override
+	public boolean deleteItem(String item){
+		return false;
+	}
 }
  		

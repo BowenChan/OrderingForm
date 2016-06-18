@@ -6,18 +6,37 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Stock")
+@Table(name = "Inventory")
 public class Items {
 	
-	private int JasmineTea;
+	private int itemID;
+	private String item;
+	private int stock;
 	
 	@Id
 	@GeneratedValue
-	private int getJasmineTea(){
-		return JasmineTea;
+	public int getItemID(){
+		return itemID;
 	}
 	
-	private void setJasmineTea(int stock){
-		JasmineTea = stock;
+	public void setItemID(int id){
+		itemID = id;
 	}
+	
+	public String getItem(){
+		return item;
+	}
+	
+	public void setItem(String itemName){
+		item = itemName;
+	}
+	
+	public int getItemAmount(){
+		return stock;
+	}
+	
+	public void setItemAmount(int amount){
+		stock = amount;
+	}
+	
 }

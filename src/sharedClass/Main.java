@@ -161,7 +161,9 @@ public class Main {
 			if(username.equals("admin"))
 				admin = true;
 		}
-		
+		else{
+			System.out.println("\nYou were unable to login\n");
+		}
 		return false;
 	}
 	
@@ -171,7 +173,9 @@ public class Main {
 	 * @return
 	 */
 	public static boolean logOut(Scanner in){
-		return false;
+		admin = false;
+		login = false;
+		return true;
 	}
 	
 	/**
