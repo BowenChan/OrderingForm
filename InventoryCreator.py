@@ -30,6 +30,7 @@ main(root)
 
 
 output_file = open( 'Inventory.xml', 'w' )
-output_file.write( '<?xml version="1.0"?>' )
+#output_file.write( '<?xml version="1.0"?>' )
+
 output_file.write( DM.parseString(ET.tostring( root )).toprettyxml(indent="	") )
 output_file.close()

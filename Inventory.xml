@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<Inventory>
+	<item name="Jasmine">
+		<Amount>10</Amount>
+	</item>
+	<item name="Early Grey">
+		<Amount>10</Amount>
+	</item>
+</Inventory>

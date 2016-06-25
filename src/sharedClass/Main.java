@@ -14,10 +14,16 @@ public class Main {
 	private static boolean admin;
 	
 	public static void main(String[] args){
+
+		Scanner in= new Scanner(System.in);
+		System.out.println("What is the name of the file: ");
+		String fileName = in.next();
+		XMLParser parse = new XMLParser(fileName);
 		sLayer = new ServiceLayer();
 		admin = false;
 		login = false;
 		while(optionMenu(login, admin)); // always run the the option until they exit
+		
 	}
 
 	/**

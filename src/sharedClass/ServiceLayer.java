@@ -27,6 +27,9 @@ public class ServiceLayer {
 			user.setPassword("admin");
 			storeDAO.createA(user);
 		}
+		//load up the database
+		
+		
 		
 	}
 	
