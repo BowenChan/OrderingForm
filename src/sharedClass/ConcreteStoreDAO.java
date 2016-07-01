@@ -10,6 +10,7 @@ import org.hibernate.*;
 import clientStore.Client;
 import clientStore.QueueClient;
 import serverStore.Admin;
+import serverStore.Items;
 
 public class ConcreteStoreDAO implements StoreDAO {
 
@@ -335,8 +336,17 @@ public class ConcreteStoreDAO implements StoreDAO {
 	 * @return			Whether the item fully persisted
 	 */
 	@Override
-	public boolean createInventory(String item, int amount){
-		return true;
+	public boolean createInventory(Items item){
+		Session session = sessionFactory.openSession();
+		try{
+			session.beginTransaction();
+			session.save(item);
+			session.getTransaction().commit();
+			session.close();
+			return true;
+		}catch(Exception e){
+			return false;
+		}
 	}
 	
 	/**
@@ -348,7 +358,7 @@ public class ConcreteStoreDAO implements StoreDAO {
 	 * @return			Whether the item fully persisted
 	 */
 	@Override
-	public boolean updateInventory(String item, int amount){
+	public boolean updateInventory(Items item){
 		return true;
 	}
 
@@ -358,7 +368,7 @@ public class ConcreteStoreDAO implements StoreDAO {
 	 * @return			Whether the item fully deleted
 	 */
 	@Override
-	public boolean deleteItem(String item){
+	public boolean deleteItem(Items item){
 		return false;
 	}
 }

@@ -2,10 +2,14 @@ package sharedClass;
 
 import java.util.List;
 
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 import clientStore.Address;
 import clientStore.Client;
 import clientStore.QueueClient;
 import serverStore.Admin;
+import serverStore.Items;
 
 public class ServiceLayer {
 	
@@ -18,7 +22,7 @@ public class ServiceLayer {
 	 * Initialize all instance variable and checks if the admin exist
 	 * 
 	 */
-	public ServiceLayer() {
+	public ServiceLayer(XMLParser parse) {
 		// TODO Auto-generated constructor stub
 		storeDAO = new ConcreteStoreDAO();
 		if(!checkAdmin()){
@@ -27,8 +31,19 @@ public class ServiceLayer {
 			user.setPassword("admin");
 			storeDAO.createA(user);
 		}
-		//load up the database
 		
+		
+		//load up the database
+		for(int i = 0; i < parse.getNodeList().getLength(); i++){
+			Node node = parse.getNodeList().item(i);
+			if(node.getNodeType() == Node.ELEMENT_NODE){
+				Element element = (Element) node;
+				Items item = new Items();
+				item.setItem(element.getAttribute("name"));
+				item.setItemAmount(Integer.parseInt(element.getElementsByTagName("Amount").item(0).getTextContent()));
+				storeDAO.createInventory(item);
+			}
+		}
 		
 		
 	}

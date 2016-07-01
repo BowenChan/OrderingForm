@@ -6,6 +6,7 @@ import java.util.Queue;
 import clientStore.Client;
 import clientStore.QueueClient;
 import serverStore.Admin;
+import serverStore.Items;
 
 public interface StoreDAO {
 	
@@ -32,9 +33,9 @@ public interface StoreDAO {
 	Client searchClientByID(String keyword);
 	
 	boolean checkAdmin();
-	boolean createInventory(String item, int amount);
-	boolean updateInventory(String item, int amount);
-	boolean deleteItem(String item);
+	boolean createInventory(Items item);
+	boolean updateInventory(Items item);
+	boolean deleteItem(Items item);
 	
 
 }
