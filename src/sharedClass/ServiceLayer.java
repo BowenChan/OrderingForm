@@ -101,12 +101,19 @@ public class ServiceLayer {
 	}
 	
 	public boolean login(String username, String password){
-		User user = storeDAO.findUser(username, password);
-		if(user != null)
+		currentLogin = storeDAO.findUser(username, password);
+		if(currentLogin != null)
 			return true;
 		return false;
 	}
-	
+	public boolean changePassword(String oldPass, String newPass){
+		if(currentLogin.getPassword().equals(oldPass)){
+			currentLogin.setPassword(newPass);
+			storeDAO.update(currentLogin);
+			return true;
+		}
+		return false;
+	}
 	public boolean createItem(String itemName, int amount){
 		return true;
 	}

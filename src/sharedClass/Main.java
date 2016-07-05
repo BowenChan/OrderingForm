@@ -18,6 +18,7 @@ public class Main {
 	private static boolean login;
 	private static boolean admin;
 	private static XMLParser parse;
+
 	public static void main(String[] args){
 
 		//Takes in the Inventory xml file to read
@@ -310,7 +311,18 @@ public class Main {
 	 * @return
 	 */
 	public static boolean changeYourPassword(Scanner in){
+		System.out.println("-------Chaning Password--------");
+		System.out.print("Please Enter your old password: ");
+		String oldPass = in.next();
+		System.out.print("Please Enter your new password: ");
+		String newPass = in.next();
 		
+		if(sLayer.changePassword(oldPass, newPass)){
+			System.out.println("Password has been succesfully changed");
+		}
+		else {
+			System.out.println("You have enter the incorrect password");
+		}
 		return true;
 	}
 

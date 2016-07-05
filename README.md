@@ -32,4 +32,6 @@ Version 1: To Do List
 	Presentation layer functions
 	Service Layer Functions
 	DAO Functions
+	Add the User ID to the clients account information
+		Remove the userName and Password from the Clients account
 

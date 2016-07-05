@@ -180,7 +180,25 @@ public class ConcreteStoreDAO implements StoreDAO {
 
 	}
 	
-
+	/**
+	 * A user's password will be updated and persisted into the table
+	 * 
+	 * @param	User	The current user that the password will change
+	 * @return			Whether the password change persisted properly
+	 */
+	@Override
+	public boolean update(User user){
+		try{
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+			session.update(user);
+			session.getTransaction().commit();
+			session.close();
+			return true;
+		} catch(Exception e){
+			return false;
+		}
+	}
 	/**
 	 * This will output all orders that have been made since the start
 	 * 
