@@ -21,11 +21,11 @@ Version 1: To Do List
 	Server Log in x 
 
 	Server Assigning Primary ID to Client
-	Client Log in
+	Client Log in X
 
 	Logout function
 		
-	Determine how to store items in stock//Inventory
+	Determine how to store items in stock//Inventory x
 	Work on Invoice table
 
 	Allow admin to register new admins
