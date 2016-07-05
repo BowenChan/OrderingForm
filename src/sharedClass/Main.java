@@ -204,7 +204,7 @@ public class Main {
 	 *	Prints out the items inside the inventory and their quantity
 	 */
 	public static void checkInventory(Scanner in){
-		sLayer.checkInventory();
+		sLayer.retrieveInventory();
 	}
 	
 	/**

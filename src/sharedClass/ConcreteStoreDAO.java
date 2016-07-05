@@ -394,6 +394,7 @@ public class ConcreteStoreDAO implements StoreDAO {
 			Object queryResult = query.uniqueResult();
 			Items res =  (Items) queryResult;
 			session.getTransaction().commit();
+			session.close();
 			return res;
 		} catch (NotFoundException e) {
 			// TODO: handle exception
@@ -440,7 +441,20 @@ public class ConcreteStoreDAO implements StoreDAO {
 	 */
 	@Override
 	public List<Items> findAllInventoryItem(){
-		return null;
+		Session session = sessionFactory.openSession();
+		try {
+			session.beginTransaction();
+			String queryString = "From Items";
+			Query queryResult = session.createQuery(queryString);
+			List<Items> res = queryResult.list();
+			session.getTransaction().commit();
+			session.close();
+			
+			return res;
+		} catch (Exception e) {
+			return null;
+			// TODO: handle exception
+		}
 	}
 }
  		

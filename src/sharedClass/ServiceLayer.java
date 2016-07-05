@@ -54,8 +54,10 @@ public class ServiceLayer {
 		return storeDAO.checkInventory();
 	}
 	
-	public String retrieveInventory(){
-		return "";
+	public void retrieveInventory(){
+		for(Items inventoryItem: storeDAO.findAllInventoryItem()){
+			System.out.println(inventoryItem.getItem() + ": " + inventoryItem.getItemAmount());
+		}
 	}
 	public boolean checkAdmin(){
 		return storeDAO.checkAdmin();
