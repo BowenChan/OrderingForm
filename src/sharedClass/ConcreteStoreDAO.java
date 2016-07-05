@@ -4,6 +4,7 @@ import java.util.GregorianCalendar;
 import java.util.List;import java.util.Queue;
 
 import javax.swing.JApplet;
+import javax.ws.rs.NotFoundException;
 
 import org.hibernate.*;
 
@@ -359,9 +360,47 @@ public class ConcreteStoreDAO implements StoreDAO {
 	 */
 	@Override
 	public boolean updateInventory(Items item){
-		return true;
+		Session session = sessionFactory.openSession();
+		try{
+			session.beginTransaction();
+			Items cur = findInventory(item);
+			item.setItemID(cur.getItemID());
+			session.update(item);
+			session.getTransaction().commit();
+			session.close();
+			return true;
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		return false;
 	}
-
+	
+	/**
+	 *  Return the Item with the corresponding ID based on the 
+	 *  inventory name
+	 *  
+	 *  @param	items	The item that you are looking for
+	 *  @return			The Item within the Database
+	 */
+	
+	public Items findInventory(Items item){
+		Session session = sessionFactory.openSession();
+		try {
+			session.beginTransaction();
+			String queryString = "From Items where item = :item";
+			Query query = session.createQuery(queryString);
+			query.setString("item", item.getItem());
+			Object queryResult = query.uniqueResult();
+			Items res =  (Items) queryResult;
+			session.getTransaction().commit();
+			return res;
+		} catch (NotFoundException e) {
+			// TODO: handle exception
+			return null;
+		}
+		
+	}
 	/**
 	 * Delete the given item from the database
 	 * 
@@ -370,6 +409,38 @@ public class ConcreteStoreDAO implements StoreDAO {
 	@Override
 	public boolean deleteItem(Items item){
 		return false;
+	}
+	
+	/**
+	 * THis will check if there are any Inventory within the 
+	 * Inventory database
+	 * 
+	 * @return			whether or not if there are Inventory items
+	 */
+	@Override
+	public boolean checkInventory() {
+		Session session = sessionFactory.openSession();
+		try {
+			session.beginTransaction();
+			String query = "From Items";
+			Query queryResult = session.createQuery(query);
+			//System.out.println(queryResult.list());
+			session.close();
+			return (queryResult.getFetchSize() != null);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Error is " + e);
+		}
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public List<Items> findAllInventoryItem(){
+		return null;
 	}
 }
  		

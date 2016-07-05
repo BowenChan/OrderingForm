@@ -33,9 +33,11 @@ public interface StoreDAO {
 	Client searchClientByID(String keyword);
 	
 	boolean checkAdmin();
+	Items findInventory(Items item);
+	List<Items> findAllInventoryItem(); 
 	boolean createInventory(Items item);
 	boolean updateInventory(Items item);
 	boolean deleteItem(Items item);
-	
+	boolean checkInventory();
 
 }

@@ -3,23 +3,28 @@ package sharedClass;
 import java.util.List;
 import java.util.Scanner;
 
+import org.w3c.dom.Element;
+
+import com.sun.mail.imap.protocol.Item;
+
 import clientStore.Address;
 import clientStore.QueueClient;
 import serverStore.Admin;
+import serverStore.Items;
 
 public class Main {
 	
 	private static ServiceLayer sLayer;
 	private static boolean login;
 	private static boolean admin;
-	
+	private static XMLParser parse;
 	public static void main(String[] args){
 
 		//Takes in the Inventory xml file to read
 		Scanner in = new Scanner(System.in);
 		System.out.println("What is the name of the file: ");
 		String fileName = in.next();
-		XMLParser parse = new XMLParser(fileName);
+		parse = new XMLParser(fileName);
 		sLayer = new ServiceLayer(parse);
 		admin = false;
 		login = false;
@@ -60,9 +65,11 @@ public class Main {
 			System.out.println("2. View all Orders");
 			System.out.println("3. Check all Queue Clients");
 			System.out.println("4. Check all Queue Orders");
-			System.out.println("5. Change your password");
-			System.out.println("6. Logout");
-			System.out.println("7. Exit");
+			System.out.println("5. Check Inventory");
+			System.out.println("6. Update Inventory");
+			System.out.println("7. Change your password");
+			System.out.println("8. Logout");
+			System.out.println("9. Exit");
 		}
 		String input;
 		input = in.nextLine();
@@ -116,6 +123,7 @@ public class Main {
 
 		case "5":
 			if(admin){
+				checkInventory(in);
 				changeYourPassword(in);
 			}
 			else if(login) {
@@ -128,7 +136,7 @@ public class Main {
 	
 		case "6":
 			if(admin){
-				logOut(in);
+				updateInventory(in);
 			}
 			else if(login) {
 				System.exit(1);
@@ -137,6 +145,22 @@ public class Main {
 				System.out.println("This input is not valid");
 			break;
 		case "7":
+			if(admin){
+				changeYourPassword(in);
+				
+			}
+			else
+				System.out.println("This input is not valid");
+			break;
+			
+		case "8":
+			if(admin){
+				logOut(in);
+			}
+			else
+				System.out.println("This input is not valid");
+			break;
+		case "9":
 			if(admin){
 				System.exit(1);
 			}
@@ -172,6 +196,35 @@ public class Main {
 			System.out.println("\nYou were unable to login\n");
 		}
 		return false;
+	}
+	
+	/**
+	 * Method checkInventory
+	 *
+	 *	Prints out the items inside the inventory and their quantity
+	 */
+	public static void checkInventory(Scanner in){
+		sLayer.checkInventory();
+	}
+	
+	/**
+	 * 	Method updateInventory
+	 *
+	 *	Takes an existing item and updates the amount in the inventory
+	 *
+	 *	@return	whether or not the items were updated
+	 */
+	public static boolean updateInventory(Scanner in){
+		checkInventory(in);
+		System.out.println("Which item would you like to modify?" );
+		String itemName = in.next();
+		Element element = parse.retriveItem(itemName);
+		System.out.println(itemName + " has " + element.getElementsByTagName("Amount").item(0).getTextContent() + " in stock");
+		System.out.println("What would you like to change it too?" );
+		int amount = in.nextInt();
+		sLayer.updateItem(itemName, amount);
+		checkInventory(in);
+		return true;
 	}
 	
 	/** 

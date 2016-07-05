@@ -29,6 +29,19 @@ public class XMLParser {
 	public void setNodeList(NodeList nList){
 		this.nList = nList;
 	}
+	
+	public Element retriveItem(String string){
+		
+		for(int i = 0; i < nList.getLength();i++){
+			Node node = nList.item(i);
+			if(node.getNodeType() == Node.ELEMENT_NODE){
+				Element element = (Element) node;
+				if(element.getAttribute("name").equals(string))
+					return element;
+			}
+		}
+		return null;
+	}
 	public void retrieveInfo(){
 		for(int i = 0 ; i < nList.getLength();i++){
 			

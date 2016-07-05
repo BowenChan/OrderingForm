@@ -34,21 +34,29 @@ public class ServiceLayer {
 		
 		
 		//load up the database
-		for(int i = 0; i < parse.getNodeList().getLength(); i++){
-			Node node = parse.getNodeList().item(i);
-			if(node.getNodeType() == Node.ELEMENT_NODE){
-				Element element = (Element) node;
-				Items item = new Items();
-				item.setItem(element.getAttribute("name"));
-				item.setItemAmount(Integer.parseInt(element.getElementsByTagName("Amount").item(0).getTextContent()));
-				storeDAO.createInventory(item);
+		if(!checkInventory()){
+			for(int i = 0; i < parse.getNodeList().getLength(); i++){
+				Node node = parse.getNodeList().item(i);
+				if(node.getNodeType() == Node.ELEMENT_NODE){
+					Element element = (Element) node;
+					Items item = new Items();
+					item.setItem(element.getAttribute("name"));
+					item.setItemAmount(Integer.parseInt(element.getElementsByTagName("Amount").item(0).getTextContent()));
+					storeDAO.createInventory(item);
+				}
 			}
 		}
 		
 		
 	}
 	
+	public boolean checkInventory(){
+		return storeDAO.checkInventory();
+	}
 	
+	public String retrieveInventory(){
+		return "";
+	}
 	public boolean checkAdmin(){
 		return storeDAO.checkAdmin();
 	}
@@ -95,6 +103,16 @@ public class ServiceLayer {
 		if(user != null)
 			return true;
 		return false;
+	}
+	
+	public boolean createItem(String itemName, int amount){
+		return true;
+	}
+	public boolean updateItem(String itemName, int amount){
+		Items item = new Items();
+		item.setItem(itemName);
+		item.setItemAmount(amount);
+		return storeDAO.updateInventory(item);
 	}
 	
 }
