@@ -1,5 +1,6 @@
 package sharedClass;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,6 +9,7 @@ import org.w3c.dom.Element;
 import com.sun.mail.imap.protocol.Item;
 
 import clientStore.Address;
+import clientStore.Client;
 import clientStore.QueueClient;
 import serverStore.Admin;
 import serverStore.Items;
@@ -23,10 +25,20 @@ public class Main {
 
 		//Takes in the Inventory xml file to read
 		Scanner in = new Scanner(System.in);
-		System.out.println("What is the name of the file: ");
-		String fileName = in.next();
-		parse = new XMLParser(fileName);
-		sLayer = new ServiceLayer(parse);
+		
+		sLayer = new ServiceLayer();
+		if(!sLayer.checkInventory()){
+			
+			try{
+				System.out.println("What is the name of the file: ");
+				String fileName = in.next();
+				parse = new XMLParser(fileName);
+				sLayer.importInventory(parse);
+				
+			}catch(NullPointerException e){
+				System.out.println("File not found");
+			}
+		}
 		admin = false;
 		login = false;
 		while(optionMenu(login, admin)); // always run the the option until they exit
@@ -236,6 +248,7 @@ public class Main {
 	public static boolean logOut(Scanner in){
 		admin = false;
 		login = false;
+		sLayer.logOut();
 		return true;
 	}
 	
@@ -333,6 +346,10 @@ public class Main {
 	 * @return
 	 */
 	public static boolean viewAllCompany(Scanner in){
+		List<Client> clients = sLayer.viewAllCompany();
+		for(Client client : clients){
+			System.out.println(client.toString());
+		}
 		return true;
 	}
 

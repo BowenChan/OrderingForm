@@ -221,6 +221,18 @@ public class ConcreteStoreDAO implements StoreDAO {
 	@Override
 	public List<Client> findAllClient() {
 		// TODO Auto-generated method stub
+		try{
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+			String queryString = "from Client";
+			Query queryResult = session.createQuery(queryString);
+			List<Client>clients = queryResult.list();
+			session.getTransaction().commit();
+			session.close();
+			return clients;
+		} catch(Exception e){
+			System.out.println(e.toString());
+		}
 		return null;
 	}
 
@@ -275,8 +287,9 @@ public class ConcreteStoreDAO implements StoreDAO {
 			String query = "From Admin";
 			Query queryResult = session.createQuery(query);
 			//System.out.println(queryResult.list());
+			boolean result = queryResult.list().isEmpty();
 			session.close();
-			return (queryResult.getFetchSize() != null);
+			return !result;
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("Error is " + e);
@@ -443,9 +456,9 @@ public class ConcreteStoreDAO implements StoreDAO {
 			session.beginTransaction();
 			String query = "From Items";
 			Query queryResult = session.createQuery(query);
-			//System.out.println(queryResult.list());
+			boolean result = queryResult.list().isEmpty();
 			session.close();
-			return (queryResult.getFetchSize() != null);
+			return !result;
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("Error is " + e);

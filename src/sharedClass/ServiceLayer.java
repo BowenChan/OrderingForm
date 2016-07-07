@@ -1,5 +1,7 @@
 package sharedClass;
 
+import java.nio.file.FileSystemNotFoundException;
+import java.nio.file.Files;
 import java.util.List;
 
 import org.w3c.dom.Element;
@@ -22,7 +24,7 @@ public class ServiceLayer {
 	 * Initialize all instance variable and checks if the admin exist
 	 * 
 	 */
-	public ServiceLayer(XMLParser parse) {
+	public ServiceLayer() {
 		// TODO Auto-generated constructor stub
 		storeDAO = new ConcreteStoreDAO();
 		if(!checkAdmin()){
@@ -33,23 +35,21 @@ public class ServiceLayer {
 		}
 		
 		
-		//load up the database
-		if(!checkInventory()){
-			for(int i = 0; i < parse.getNodeList().getLength(); i++){
-				Node node = parse.getNodeList().item(i);
-				if(node.getNodeType() == Node.ELEMENT_NODE){
-					Element element = (Element) node;
-					Items item = new Items();
-					item.setItem(element.getAttribute("name"));
-					item.setItemAmount(Integer.parseInt(element.getElementsByTagName("Amount").item(0).getTextContent()));
-					storeDAO.createInventory(item);
-				}
-			}
-		}
-		
 		
 	}
-	
+	public void importInventory(XMLParser parse) throws FileSystemNotFoundException{
+		
+		for(int i = 0; i < parse.getNodeList().getLength(); i++){
+			Node node = parse.getNodeList().item(i);
+			if(node.getNodeType() == Node.ELEMENT_NODE){
+				Element element = (Element) node;
+				Items item = new Items();
+				item.setItem(element.getAttribute("name"));
+				item.setItemAmount(Integer.parseInt(element.getElementsByTagName("Amount").item(0).getTextContent()));
+				storeDAO.createInventory(item);
+			}
+		}
+	}
 	public boolean checkInventory(){
 		return storeDAO.checkInventory();
 	}
@@ -100,6 +100,10 @@ public class ServiceLayer {
 		return clients;
 	}
 	
+	public List<Client> viewAllCompany(){
+		List<Client> clients = storeDAO.findAllClient();
+		return clients;
+	}
 	public boolean login(String username, String password){
 		currentLogin = storeDAO.findUser(username, password);
 		if(currentLogin != null)
@@ -122,6 +126,10 @@ public class ServiceLayer {
 		item.setItem(itemName);
 		item.setItemAmount(amount);
 		return storeDAO.updateInventory(item);
+	}
+	
+	public void logOut(){
+		currentLogin = null;
 	}
 	
 }

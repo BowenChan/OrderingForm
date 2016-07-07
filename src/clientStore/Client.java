@@ -74,5 +74,8 @@ public class Client {
 		this.registrationDate = registrationDate;
 	}
 	   
-	
+	@Override
+	public String toString(){
+		return "ID: " + getID() + " Company: " + getKeyword() + " Address: " +getAddress();
+	}
 }
